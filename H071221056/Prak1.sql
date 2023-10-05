@@ -1,50 +1,46 @@
--- NO 1
 CREATE DATABASE library;
-
-CREATE TABLE books(
-	id_book INT PRIMARY KEY,
-	isbn_book VARCHAR(50) UNIQUE,
-	title_book VARCHAR(50) NOT NULL,
+CREATE TABLE books (
+	id INT PRIMARY KEY,
+	isbn VARCHAR(50) UNIQUE,
+	title VARCHAR (50) NOT NULL,
 	pages INT,
-	summary TEXT,
-	genre_book VARCHAR(50) NOT NULL 
+	summary TEXT ,
+	genre VARCHAR (50) NOT NULL
+	
 );
 
--- NO 2
+-- NO2
 ALTER TABLE books
-MODIFY isbn_book VARCHAR(13);
+MODIFY isbn CHAR(13) ;
 
--- NO 3
-ALTER TABLE books DROP summary;
+-- NO3
+ALTER TABLE books
+DROP summary;
 
--- NO 4
+-- NO4
 DESCRIBE books;
 SHOW TABLES;
 
 -- NO 5
 CREATE DATABASE db_praktikum;
-
-CREATE TABLE students(
-	student_id INT(11) PRIMARY KEY,
+USE db_praktikum;
+CREATE TABLE students (
 	name_student VARCHAR(50) NOT NULL,
-	email_student VARCHAR(255)UNIQUE,
-	gender CHAR(1)
+	email VARCHAR(255) UNIQUE,
+	gender CHAR  (1),
+	student_id INT PRIMARY KEY 
 );
 
-CREATE TABLE classes(
-	class_id INT PRIMARY KEY AUTO_INCREMENT,
-	class_name VARCHAR(50)
+CREATE TABLE classes (
+	classes_name VARCHAR(50),
+	class_id INT PRIMARY KEY AUTO_INCREMENT 
 );
 
 CREATE TABLE class_student(
-	enrollment_id INT(11) PRIMARY KEY AUTO_INCREMENT,
 	grade CHAR(1) DEFAULT 'E',
-	student_id INT(11),
-	class_id INT(11),
+	student_id INT ,
+	class_id INT,
+	enrollment_id INT PRIMARY KEY AUTO_INCREMENT,
 	
-	FOREIGN KEY (student_id) REFERENCES students(student_id),
-	FOREIGN KEY (class_id) REFERENCES classes(class_id)
-);
-
-SHOW TABLES;
-DESCRIBE class_student;
+	FOREIGN KEY(student_id) REFERENCES students(student_id),
+	FOREIGN KEY(class_id) REFERENCES classes (class_id)
