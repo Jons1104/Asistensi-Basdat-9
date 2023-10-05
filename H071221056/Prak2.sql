@@ -1,28 +1,52 @@
 USE classicmodels;
 
--- NO 1 mendapatkan data yang memenuhi kriteria(yang dimaui)
-SELECT customerName, city, country 
+-- NO1
+SELECT customername ,  
+		city , 
+		country 
 FROM customers
-WHERE country = 'USA';
+WHERE country = 'USA'
 
--- NO 2 menampilkan data unik/tidak ada data yang diambil double 
-SELECT DISTINCT productVendor
-FROM products ;
+-- NO2
+SELECT DISTINCT  productVendor
+FROM products;
 
--- NO 3 
-SELECT* FROM payments
-WHERE customernumber = 124
-ORDER BY customernumber DESC;
+-- NO3
+SELECT customernumber ,  
+		checknumber , 
+		paymentdate,
+		amount
+FROM payments
+WHERE customernumber = '124'
+ORDER BY  customernumber DESC ;
 
--- NO 4 
-SELECT productname 'Nama produk', buyprice 'Harga beli', quantityinstock 'Jumlah dalam stok'
+-- n04
+SELECT 
+ 		productname AS 'Nama produk', 
+		buyprice AS ' Harga beli', 
+		quantityinstock AS 'Jumlah dalam stok'
 FROM products
-WHERE quantityinstock <= '3000' AND quantityinstock >= '1000'
+WHERE quantityinstock >=1000 AND quantityinstock<=3000
 ORDER BY buyprice ASC 
 LIMIT 5,10;
 
--- Tugas tambahan
-SELECT* FROM customers 
-WHERE country = 'Germany' AND creditLimit = 0
-ORDER BY addressLine1 DESC 
-LIMIT 3,5;
+-- tugas tambahan
+SELECT *
+FROM orders
+WHERE status = 'cancelled' AND orderdate = '2003-11-11';
+
+
+SELECT *
+FROM customers
+WHERE customernumber = '496';
+
+
+
+
+
+
+
+
+	
+
+
