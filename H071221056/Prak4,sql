@@ -1,0 +1,66 @@
+USE classicmodels;
+
+-- NO 1
+SELECT c.customername AS 'Nama Customer', c.country AS 'Negara', p.paymentDate AS 'tanggal'
+FROM customers c
+INNER JOIN payments p
+ON c.customerNumber = p.customerNumber
+WHERE paymentDate >= '2005-01-01'
+ORDER BY p.paymentDate ASC ;
+
+-- NO 2
+SELECT DISTINCT  c.customerNumber AS 'Nama customer', p.productName, pl.textDescription
+FROM customers c
+INNER JOIN orders o 
+ON c.customerNumber = o.customerNumber
+INNER JOIN orderdetails oi 
+ON o.orderNumber = oi.orderNumber
+INNER JOIN products p 
+ON oi.productCode = p.productCode
+INNER JOIN productlines pl 
+ON p.productline = pl.productline
+WHERE p.productName = 'The Titanic';
+
+-- NO 3
+ALTER TABLE products
+ADD COLUMN status VARCHAR(20);
+
+UPDATE products
+SET status = 'best selling'
+WHERE productCode = 'S12_4675';
+
+SELECT p.productCode, p.productName, od.quantityOrdered, p.status
+FROM products p
+JOIN orderdetails od
+ON p.productCode = od.productCode
+ORDER BY od.quantityOrdered DESC 
+-- LIMIT 1;
+
+-- NO 4
+ALTER TABLE payments DROP CONSTRAINT payments_ibfk_1;     
+ALTER TABLE orders DROP CONSTRAINT  orders_ibfk_1;
+ALTER TABLE orderdetails DROP CONSTRAINT orderdetails_ibfk_1;
+	
+SELECT c.customerNumber, o.status
+FROM customers c
+JOIN orders o
+ON c.customerNumber = o.customerNumber
+WHERE STATUS = 'Cancelled';
+
+DELETE customers
+FROM customers
+JOIN orders
+ON customers.customerNumber = orders.customerNumber
+WHERE orders.`status` = 'Cancelled';
+
+
+-- soal tambahan
+
+SELECT o.orderdate, p.productName
+FROM orders o
+INNER JOIN orderdetails od
+ON o.orderNumber = od.orderNumber 
+INNER JOIN products p
+ON od.productCode  = p.productCode
+WHERE productName = '1940 Ford Pickup Truck'
+ORDER BY o.orderdate DESC  ;
